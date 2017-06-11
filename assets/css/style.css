@@ -3,10 +3,13 @@ body {
 	background: url("../images/squared_metal.png");
 }
 
+/**Header**/
 .jumbotron {
 	margin-top: 10px;
 	text-align: center;
-	background: #fff;
+	background: none;
+	height: 100px;
+	padding: 0;
 }
 
 .jumbotron h1 {
@@ -15,8 +18,13 @@ body {
 	font-family: 'Josefin Sans', sans-serif;
 }
 
-.row {
-	margin-bottom: 40px;
+/**Main Content**/
+p {
+    cursor: pointer;
+}
+
+#credentials {
+	margin-bottom: 20px;
 }
 
 .panel-primary,
@@ -24,7 +32,6 @@ body {
 .panel-warning {
 	min-height: 200px;
 	text-align: center;
-	margin-bottom: 40px;
 }
 
 #test {
@@ -44,6 +51,32 @@ body {
 .panel-heading {
 	font-size: 18px;
 	color: #fff;
+}
+
+#connect {
+  width: 100%;
+  padding: 0 60px 20px 80px;
+}
+
+.social {
+  margin: 20px 0 0 10px;
+  width: 62px;
+  height: 62px;
+}
+
+.github {
+  margin: 22px 0 0 5px;
+  width: 75px;
+  height: 62px;
+}
+
+/**Player1 & 2 divs**/
+#score {
+	margin: 0;
+}
+
+#wins {
+	float: left;
 }
 
 

@@ -13,49 +13,79 @@ $(document).ready(function(){
   var database = firebase.database();
 
   // Our array of possible computer choices.
-  var computerChoices = ["r", "p", "s"];
+  var choices = ["rock", "paper", "scissors"];
 
   // Variables for tracking our wins, losses and ties. They begin at 0.
-  var wins = 0;
-  var losses = 0;
+  var playerOneName = "";
+  var playerTwoName = "";
+  var playerOneChoice = "";
+  var playerTwoChoice = "";
+  var playerOneWins = 0;
+  var playerTwoWins = 0;
+  var playerOneLosses = 0;
+  var playerTwoLosses = 0;
   var ties = 0;
 
-  // When the user presses a key, it will run the following function...
-  document.onkeyup = function(event) {
+  $("#add-name").on("click", function(event) {
+      // prevent form from trying to submit/refresh the page
+      event.preventDefault();
 
-    // Determine which key was pressed
-    var userGuess = event.key;
+      // Capture User Inputs and store them into variables
+      var name = $("#name-input").val().trim(); //getting value and triming off extra space.
+      var email = $("#email-input").val().trim();
+      var age = $("#age-input").val().trim();
+      var comment = $("#comment-input").val().trim();
 
-    // Sets the computerGuess variable equal to a random choice from the computerChoice array.
-    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      // Console log each of the user inputs to confirm we are receiving them
+      console.log(name);
+      console.log(email);
+      console.log(age);
+      console.log(comment);
 
+      // Output all of the new information into the relevant HTML sections
+      $("#name-display").html(name);
+      $("#email-display").html(email);
+      $("#age-display").html(age);
+      $("#comment-display").html(comment);
+
+    });
+
+  // When a player makes a choice by clicking on one of the choices, it will run the following function...
+  $("#xxx").on("click", function(event) {
+    
     // If the user presses "r" or "p" or "s", run the game logic.
-    if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+    if ((playerOneChoice === "rock") || (playerOneChoice === "paper") || (playerOneChoice === "scissors")) {
 
         // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate counter.
-        if ((userGuess === "r") && (computerGuess === "s")) {
-          wins++;
+        if ((playerOneChoice === "rock") && (playerTwoChoice === "scissors")) {
+          playerOneWins++;
+          playerTwoLosses++;
         }
-        else if ((userGuess === "r") && (computerGuess === "p")) {
-          losses++;
+        else if ((playerOneChoice === "rock") && (playerTwoChoice === "paper")) {
+          playerOneLosses++;
+          playerTwoWin++;
         }
-        else if ((userGuess === "s") && (computerGuess === "r")) {
-          losses++;
+        else if ((playerOneChoice === "scissors") && (playerTwoChoice === "rock")) {
+          playerOneLosses++;
+          playerTwoWin++;
         }
-        else if ((userGuess === "s") && (computerGuess === "p")) {
-          wins++;
+        else if ((playerOneChoice === "scissors") && (playerTwoChoice === "paper")) {
+          playerOneWins++;
+          playerTwoLosses++;
         }
-        else if ((userGuess === "p") && (computerGuess === "r")) {
-          wins++;
+        else if ((playerOneChoice === "paper") && (playerTwoChoice === "rock")) {
+          playerOneWins++;
+          playerTwoLosses++;
         }
-        else if ((userGuess === "p") && (computerGuess === "s")) {
-          losses++;
+        else if ((playerOneChoice === "paper") && (playerTwoChoice === "scissors")) {
+          playerOneLosses++;
+          playerTwoWin++;
         }
-        else if (userGuess === computerGuess) {
+        else if (playerOneChoice === playerTwoChoice) {
           ties++;
         }
     }
-  };
+  });
 
 
 
