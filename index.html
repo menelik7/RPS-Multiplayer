@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RPS-Multiplayer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="assets/javascript/game.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="jumbotron">
+		  <h1>Rock Paper Scissors</h1>
+		</div>
+
+		<div class="row" id="credentials">
+			<div class="col-lg-4 col-lg-offset-4">
+	    		<div class="input-group">
+			      <input type="text" class="form-control" placeholder="Name...">
+			      <span class="input-group-btn">
+			      <button class="btn btn-default" type="button">Go!</button>
+			      </span>
+				</div>
+			</div>
+	  	</div>
+		
+		<div class="row">
+
+			<div class="col-lg-3">
+			    <div class="panel panel-primary">
+				  <div class="panel-heading">Player 1</div>
+				  <div class="panel-body"></div>
+			    </div>
+		    </div>
+
+		    <div class="col-lg-1" id="emptyDiv"></div>
+
+		    <div class="col-lg-4">
+			    <div class="panel panel-warning">
+				  <div class="panel-heading">Results</div>
+				  <div class="panel-body" id="results"></div>
+			    </div>
+		    </div>
+
+		    <div class="col-lg-1" id="emptyDiv"></div>
+
+		    <div class="col-lg-3">
+			    <div class="panel panel-primary">
+				  <div class="panel-heading">Player 2</div>
+				  <div class="panel-body"></div>
+			    </div>
+		    </div>
+
+		    <div class="col-lg-8 col-lg-offset-2">
+			    <div class="panel panel-success" id="message">
+					<div class="panel-heading">Chat</div>
+					<div class="panel-body"></div>
+				</div>
+			</div>
+
+			<div class="col-lg-8 col-lg-offset-2">
+	    		<div class="input-group">
+			      <input type="text" class="form-control" placeholder="type in your message...">
+			      <span class="input-group-btn">
+			      <button class="btn btn-success" type="button">Post</button>
+			      </span>
+				</div>
+			</div>
+
+	    </div>
+	</div>
+
+</body>
+</html>
