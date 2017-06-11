@@ -1,6 +1,7 @@
 body {
 	font-family: 'Josefin Sans', sans-serif;
-	background: url("../images/squared_metal.png");
+	background: url("../images/cork-wallet.png");
+	color: #777;
 }
 
 /**Header**/
@@ -14,7 +15,6 @@ body {
 
 .jumbotron h1 {
 	margin: auto;
-	color: #2F6FB9;
 	font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -25,6 +25,7 @@ p {
 
 #credentials {
 	margin-bottom: 20px;
+	padding: 0;
 }
 
 .panel-primary,
@@ -34,8 +35,7 @@ p {
 	text-align: center;
 }
 
-#test {
-	color: #2F6FB9;
+#results {
 	font-size: 18px;
 }
 .col-md-8 {
