@@ -75,6 +75,14 @@ p {
 	margin: 0;
 }
 
+#player1-wins,
+#player1-losses,
+#player2-wins,
+#player2-losses,
+#ties {
+	padding: 0;
+}
+
 #wins {
 	float: left;
 }

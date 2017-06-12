@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="col-lg-4 col-lg-offset-4" id="credentials">
 	    		<div class="input-group">
-			      <input type="text" class="form-control" placeholder="Name...">
+			      <input type="text" class="form-control" placeholder="Name..." id="name-input">
 			      <span class="input-group-btn">
 			      <button class="btn btn-success" type="button" id="add-name">Go!</button>
 			      </span>
@@ -35,16 +35,17 @@
 
 			<div class="col-lg-3 col-lg-offset-1">
 			    <div class="panel panel-primary">
-				    <div class="panel-heading">Player 2</div>
+				    <div class="panel-heading" id="player1-name">Player 1</div>
 					    <div class="panel-body">
+					    	<div id="player1-choice"></div>
 					  		<p id="rock">Rock</p><br>
-					  		<p id="rock">Paper</p><br>
-					  		<p id="rock">Scissors</p><hr>
-					  			<div class="row" id="score">
-							  		<div class="col-md-4" id="wins">Wins: </div>
-							  		<div class="col-md-4" id="losses">Losses: </div>
-							  		<div class="col-md-4" id="ties">Ties: </div>
-				  				</div>
+					  		<p id="paper">Paper</p><br>
+					  		<p id="scissors">Scissors</p><hr>
+				  			<div class="row" id="score">
+						  		<div class="col-md-4" id="player1-wins">Wins: </div>
+						  		<div class="col-md-4" id="player1-losses">Losses: </div>
+						  		<div class="col-md-4" id="ties1">Ties: </div>
+			  				</div>
 			    		</div>
 			    </div>
 		    </div>
@@ -69,15 +70,16 @@
 
 		    <div class="col-lg-3">
 			    <div class="panel panel-primary">
-				    <div class="panel-heading">Player 2</div>
+				    <div class="panel-heading" id="player2-name">Player 2</div>
 					    <div class="panel-body">
+					    <div id="player2-choice"></div>
 					  		<p id="rock">Rock</p><br>
-					  		<p id="rock">Paper</p><br>
-					  		<p id="rock">Scissors</p><hr>
+					  		<p id="paper">Paper</p><br>
+					  		<p id="scissors">Scissors</p><hr>
 					  			<div class="row" id="score">
-							  		<div class="col-md-4" id="wins">Wins: </div>
-							  		<div class="col-md-4" id="losses">Losses: </div>
-							  		<div class="col-md-4" id="ties">Ties: </div>
+							  		<div class="col-md-4" id="player2-wins">Wins: </div>
+							  		<div class="col-md-4" id="player2-losses">Losses: </div>
+							  		<div class="col-md-4" id="ties2">Ties: </div>
 						  		</div>
 			    		</div>
 			    </div>
