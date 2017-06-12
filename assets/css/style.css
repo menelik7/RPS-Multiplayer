@@ -1,6 +1,6 @@
 body {
 	font-family: 'Josefin Sans', sans-serif;
-	background: url("../images/dark_embroidery.png");
+	background: url("../images/hoffman.png");
 	color: #777;
 }
 
@@ -17,7 +17,6 @@ body {
 .jumbotron h1 {
 	margin: auto;
 	font-family: 'Josefin Sans', sans-serif;
-	color: #fff;
 }
 
 /**Main Content**/
