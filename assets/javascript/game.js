@@ -54,6 +54,10 @@ $(document).ready(function(){
     var playerTwoWins = 0;
     var playerTwoLosses = 0;
     var ties = 0;
+    $("#score1").hide();
+    $("#player1-options").hide();
+    $("#score2").hide();
+    $("#player2-options").hide();
 
   $("#btnLogin").on("click", function(event) {
     // prevent form from trying to submit/refresh the page
@@ -98,7 +102,8 @@ $(document).ready(function(){
           $("#ties1").html("Ties: " + snapshot.val().players.player1.ties);
           $("#login").hide();
           $("#credentials").html("Hello <strong>" + playerOneName + "</strong>! You are player1.  Waiting for player2 to join...");
-
+          $("#score1").show();
+          $("#player1-options").show();
 
 
     // Handle the errors
