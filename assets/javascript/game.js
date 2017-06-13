@@ -101,7 +101,7 @@ $(document).ready(function(){
           $("#player1-losses").html("Losses: " + snapshot.val().players.player1.playerOneLosses);
           $("#ties1").html("Ties: " + snapshot.val().players.player1.ties);
           $("#login").hide();
-          $("#credentials").html("Hello <strong>" + playerOneName + "</strong>! You are player1.  Waiting for player2 to join...");
+          $("#credentials").html("Hello <strong>" + playerOneName + "</strong>! You are player #1.  Waiting for player #2 to join...");
           $("#score1").show();
           $("#player1-options").show();
 
