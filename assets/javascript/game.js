@@ -12,11 +12,39 @@ $(document).ready(function(){
 
     var database = firebase.database();
 
+    // connectionsRef references a specific location in our database.
+    // All of our connections will be stored in this directory.
+    var connectionsRef = database.ref("/connections");
+
+    // '.info/connected' is a special location provided by Firebase that is updated every time
+    // the client's connection state changes.
+    // '.info/connected' is a boolean value, true if the player is connected and false if they are not.
+    var connectedRef = database.ref(".info/connected");
+
+    // When the player's connection state changes...
+    connectedRef.on("value", function(snap) {
+
+      // If they are connected..
+      if (snap.val()) {
+
+        // Add player to the connections list.
+        var con = connectionsRef.push(true);
+
+        // Remove player from the connection list when they disconnect.
+        con.onDisconnect().remove();
+      }
+    });
+
+    // When first loaded or when the connections list changes...
+    connectionsRef.on("value", function(snap) {
+      // The number of online players is the number of children in the connections list.
+      snap.numChildren();
+    });
+
     // Our array of possible computer choices.
     var choices = ["rock", "paper", "scissors"];
 
     // Variables for tracking our wins, losses and ties. They begin at 0.
-
     var playerOneName = "";
     var playerOneChoice = "";
     var playerOneWins = 0;
@@ -27,15 +55,15 @@ $(document).ready(function(){
     var playerTwoLosses = 0;
     var ties = 0;
 
-  $("#add-name").on("click", function(event) {
-          // prevent form from trying to submit/refresh the page
-          event.preventDefault();
+  $("#btnLogin").on("click", function(event) {
+    // prevent form from trying to submit/refresh the page
+    event.preventDefault();
 
-          // Capture User Inputs and store them into variables
-          playerOneName = $("#name-input").val().trim(); //getting value and triming off extra space.
+    // Capture User Inputs and store them into variables
+    playerOneName = $("#name-input").val().trim(); //getting value and triming off extra space.
 
-          //Clear the input box once name has been submitted
-          $("#name-input").val("");
+    //Clear the input box once name has been submitted
+    $("#name-input").val("");
 
     database.ref().set({
 
@@ -62,13 +90,16 @@ $(document).ready(function(){
     });
 
   database.ref().on("value", function(snapshot) {
-
           // Change the HTML to reflect
           $("#player1-name").html(snapshot.val().players.player1.playerOneName);
           $("#results").html(snapshot.val().players.player1.playerOneChoice);
           $("#player1-wins").html("Wins: " + snapshot.val().players.player1.playerOneWins);
           $("#player1-losses").html("Losses: " + snapshot.val().players.player1.playerOneLosses);
           $("#ties1").html("Ties: " + snapshot.val().players.player1.ties);
+          $("#login").hide();
+          $("#credentials").html("Hello <strong>" + playerOneName + "</strong>! You are player1.  Waiting for player2 to join...");
+
+
 
     // Handle the errors
   }, function(errorObject) {

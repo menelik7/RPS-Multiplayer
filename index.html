@@ -14,7 +14,6 @@
 	<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase-database.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase-messaging.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 </head>
 
 <body>
@@ -27,10 +26,10 @@
 
 		<div class="row">
 			<div class="col-lg-5 col-lg-offset-3" id="credentials">
-	    		<div class="input-group">
+	    		<div class="input-group" id="login">
 			      <input type="text" class="form-control" placeholder="Name..." id="name-input">
 			      <span class="input-group-btn">
-			      <button class="btn btn-success" type="button" id="add-name">Login</button>
+			      <button class="btn btn-success" type="button" id="btnLogin">Login</button>
 			      </span>
 				</div>
 			</div>
@@ -57,7 +56,7 @@
 			    <div class="col-lg-2">
 			    	<div class="row">
 					    <div class="panel panel-warning">
-							<div class="panel-heading" id="results">Results</div>
+							<div class="panel-heading">Results</div>
 							<div class="panel-body" id="results"></div>
 					    </div>
 					     <div id="connect">

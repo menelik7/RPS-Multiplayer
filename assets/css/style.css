@@ -27,6 +27,9 @@ p {
 #credentials {
 	margin: 0 0 50px 340px;
 	padding: 0;
+	background: #fff;
+	font-size: 18px;
+	text-align: center;
 }
 
 .panel-primary,
