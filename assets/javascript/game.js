@@ -28,19 +28,14 @@ $(document).ready(function(){
     var ties = 0;
 
   $("#add-name").on("click", function(event) {
-    // prevent form from trying to submit/refresh the page
-    event.preventDefault();
+          // prevent form from trying to submit/refresh the page
+          event.preventDefault();
 
-    // Capture User Inputs and store them into variables
-    playerOneName = $("#name-input").val().trim(); //getting value and triming off extra space.
-    // Console log each of the user inputs to confirm we are receiving them
-    $("#player1-name").html(playerOneName);
-    $("#player1-wins").html("Wins: " + playerOneWins);
-    $("#player1-losses").html("Losses: " + playerOneLosses);
-    $("#ties1").html("Ties: " + ties);
-    $("#ties2").html("Ties: " + ties);
-    $("#name-input").val("");
-    
+          // Capture User Inputs and store them into variables
+          playerOneName = $("#name-input").val().trim(); //getting value and triming off extra space.
+
+          //Clear the input box once name has been submitted
+          $("#name-input").val("");
 
     database.ref().set({
 
@@ -68,19 +63,12 @@ $(document).ready(function(){
 
   database.ref().on("value", function(snapshot) {
 
-          // Log everything that's coming out of snapshot
-          console.log(snapshot.val().players.player1.playerOneName);
-          console.log(snapshot.val().players.player1.playerOneChoice);
-          console.log(snapshot.val().players.player1.playerOneWins);
-          console.log(snapshot.val().players.player1.playerOneLosses);
-          console.log(snapshot.val().players.player1.ties);
-
           // Change the HTML to reflect
-          $("#player1-name").html(snapshot.val().playerOneName);
-          $("#player1-wins").html(snapshot.val().playerOneChoice);
-          $("#player1-wins").html(snapshot.val().playerOneWins);
-          $("#player1-losses").html(snapshot.val().playerOneLosses);
-          $("#ties1").html(snapshot.val().ties);
+          $("#player1-name").html(snapshot.val().players.player1.playerOneName);
+          $("#results").html(snapshot.val().players.player1.playerOneChoice);
+          $("#player1-wins").html("Wins: " + snapshot.val().players.player1.playerOneWins);
+          $("#player1-losses").html("Losses: " + snapshot.val().players.player1.playerOneLosses);
+          $("#ties1").html("Ties: " + snapshot.val().players.player1.ties);
 
     // Handle the errors
   }, function(errorObject) {
@@ -89,40 +77,40 @@ $(document).ready(function(){
 
   });
 
-  // If the user clicks "rock" or "paper" or "scissors", run the game logic.
-  function whoWon(){
+    // If the user clicks "rock" or "paper" or "scissors", run the game logic.
+    function whoWon(){
 
-  if ((playerOneChoice === "rock") || (playerOneChoice === "paper") || (playerOneChoice === "scissors")) {
+    if ((playerOneChoice === "rock") || (playerOneChoice === "paper") || (playerOneChoice === "scissors")) {
 
-      // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate counter.
-      if ((playerOneChoice === "rock") && (playerTwoChoice === "scissors")) {
-        playerOneWins++;
-        playerTwoLosses++;
-      }
-      else if ((playerOneChoice === "rock") && (playerTwoChoice === "paper")) {
-        playerOneLosses++;
-        playerTwoWin++;
-      }
-      else if ((playerOneChoice === "scissors") && (playerTwoChoice === "rock")) {
-        playerOneLosses++;
-        playerTwoWin++;
-      }
-      else if ((playerOneChoice === "scissors") && (playerTwoChoice === "paper")) {
-        playerOneWins++;
-        playerTwoLosses++;
-      }
-      else if ((playerOneChoice === "paper") && (playerTwoChoice === "rock")) {
-        playerOneWins++;
-        playerTwoLosses++;
-      }
-      else if ((playerOneChoice === "paper") && (playerTwoChoice === "scissors")) {
-        playerOneLosses++;
-        playerTwoWin++;
-      }
-      else if (playerOneChoice === playerTwoChoice) {
-        ties++;
-      }
-  }
+        // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate counter.
+        if ((playerOneChoice === "rock") && (playerTwoChoice === "scissors")) {
+          playerOneWins++;
+          playerTwoLosses++;
+        }
+        else if ((playerOneChoice === "rock") && (playerTwoChoice === "paper")) {
+          playerOneLosses++;
+          playerTwoWin++;
+        }
+        else if ((playerOneChoice === "scissors") && (playerTwoChoice === "rock")) {
+          playerOneLosses++;
+          playerTwoWin++;
+        }
+        else if ((playerOneChoice === "scissors") && (playerTwoChoice === "paper")) {
+          playerOneWins++;
+          playerTwoLosses++;
+        }
+        else if ((playerOneChoice === "paper") && (playerTwoChoice === "rock")) {
+          playerOneWins++;
+          playerTwoLosses++;
+        }
+        else if ((playerOneChoice === "paper") && (playerTwoChoice === "scissors")) {
+          playerOneLosses++;
+          playerTwoWin++;
+        }
+        else if (playerOneChoice === playerTwoChoice) {
+          ties++;
+        }
+    }
 
   }
 
