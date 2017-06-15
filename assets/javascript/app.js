@@ -15,7 +15,11 @@ $(document).ready(function(){
     firebase.initializeApp(config);
 
     var db = firebase.database().ref('game');
-// var players = 0; var started = false; var moves = 0;
+    $("#score1").hide();
+    $("#player1-options").hide();
+    $("#score2").hide();
+    $("#player2-options").hide();
+    $("#login").show();
 
 
 function startGame() {
@@ -44,25 +48,59 @@ function savePlayerName() {
 
   db.once('value')
   .then(function(state) {
-    if ( state.val().players < 2 ) 
+    if ( state.val().players < 2 ) {
       db.update({
         player1: {
-          name: name,
-          wins: 0,
-          losses: 0,
-          ties: 0
+          player1_name: name,
+          player1_wins: 0,
+          player1_losses: 0,
+          player1_ties: 0
         }
+      });
 
+      db.once("child_added", function(snapshot) {
+          $("#player1-name").html(snapshot.val().player1_name);
+          $("#player1-wins").html("Wins: " + snapshot.val().player1_wins);
+          $("#player1-losses").html("Losses: " + snapshot.val().player1_losses);
+          $("#ties1").html("Ties: " + snapshot.val().player1_ties);
+          $("#login").hide();
+          $("#score1").show();
+          $("#player1-options").show();
+          $("#credentials").html("Hello <strong>" + snapshot.val().player1_name + "</strong>! You are player #1.  Waiting for player #2 to join...");
 
       });
-    else db.update({
+    }
+    else {
+          firebase.database().ref('player1').on("child_added", function(snapshot) {
+          $("#player1-name").html(snapshot.val().player1_name);
+          $("#player1-wins").html("Wins: " + snapshot.val().player1_wins);
+          $("#player1-losses").html("Losses: " + snapshot.val().player1_losses);
+          $("#ties1").html("Ties: " + snapshot.val().player1_ties);
+          $("#score1").show();
+          $("#player1-options").show();
+      });
+      db.update({
         player2: {
-          name: name,
-          wins: 0,
-          losses: 0,
-          ties: 0
+          player2_name: name,
+          player2_wins: 0,
+          player2_losses: 0,
+          player2_ties: 0
         }
-    });
+      });
+
+      db.once("child_added", function(snapshot) {
+          // Change the HTML to reflect
+          $("#player2-name").html(snapshot.val().player2_name);
+          $("#player2-wins").html("Wins: " + snapshot.val().player2_wins);
+          $("#player2-losses").html("Losses: " + snapshot.val().player2_losses);
+          $("#ties2").html("Ties: " + snapshot.val().player2_ties);
+          $("#login").hide();
+          $("#score2").show();
+          $("#player2-options").show();
+          $("#credentials").html("Hello <strong>" + snapshot.val().player2_name + "</strong>! You are player #1.  Waiting for player #1 to make a choice...");
+
+      });
+    }
   });
 }
 
