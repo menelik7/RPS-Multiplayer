@@ -14,7 +14,7 @@ $(document).ready(function(){
 
     // connectionsRef references a specific location in our database.
     // All of our connections will be stored in this directory.
-    var connectionsRef = database.ref("/connections");
+    var connectionsRef = database.ref("/players");
 
     // '.info/connected' is a special location provided by Firebase that is updated every time
     // the client's connection state changes.
@@ -58,6 +58,7 @@ $(document).ready(function(){
     $("#player1-options").hide();
     $("#score2").hide();
     $("#player2-options").hide();
+    $("#login").show();
 
   $("#btnLogin").on("click", function(event) {
     // prevent form from trying to submit/refresh the page
@@ -92,16 +93,16 @@ $(document).ready(function(){
       }
 
     });
+    $("#credentials").html("Hello <strong>" + playerOneName + "</strong>! You are player #1.  Waiting for player #2 to join...");
+  });
 
   database.ref().on("value", function(snapshot) {
           // Change the HTML to reflect
           $("#player1-name").html(snapshot.val().players.player1.playerOneName);
-          $("#results").html(snapshot.val().players.player1.playerOneChoice);
           $("#player1-wins").html("Wins: " + snapshot.val().players.player1.playerOneWins);
           $("#player1-losses").html("Losses: " + snapshot.val().players.player1.playerOneLosses);
           $("#ties1").html("Ties: " + snapshot.val().players.player1.ties);
           $("#login").hide();
-          $("#credentials").html("Hello <strong>" + playerOneName + "</strong>! You are player #1.  Waiting for player #2 to join...");
           $("#score1").show();
           $("#player1-options").show();
 
@@ -111,35 +112,70 @@ $(document).ready(function(){
     console.log("Errors handled: " + errorObject.code);
   });
 
+  $("#rock1").on("click", function() {
+    playerOneChoice = "Rock";
+    database.ref().on("value", function(snapshot) {
+    $("#player1-options").html("");
+    $("#player1-options").html("You chose <strong>" + playerOneChoice + "</strong>");
   });
+  });
+  $("#paper1").on("click", function() {
+    playerOneChoice = "Paper";
+    $("#player1-options").html("");
+    $("#player1-options").html("You chose <strong>" + playerOneChoice + "</strong>");
+  });
+  $("#scissors1").on("click", function() {
+    playerOneChoice = "Scissors";
+    $("#player1-options").html("");
+    $("#player1-options").html("You chose <strong>" + playerOneChoice + "</strong>");
+  });
+
+
+  $("#rock2").on("click", function() {
+    playerTwoChoice = "Rock";
+    $("#player1-options").html("");
+    $("#player1-options").html("You chose <strong>" + playerTwoChoice + "</strong>");
+  });
+  $("#paper2").on("click", function() {
+    playerTwoChoice = "Paper";
+    $("#player1-options").html("");
+    $("#player1-options").html("You chose <strong>" + playerTwoChoice + "</strong>");
+  });
+  $("#scissors2").on("click", function() {
+    playerTwoChoice = "Scissors";
+    $("#player1-options").html("");
+    $("#player1-options").html("You chose <strong>" + playerTwoChoice + "</strong>");
+  });
+
 
     // If the user clicks "rock" or "paper" or "scissors", run the game logic.
     function whoWon(){
 
-    if ((playerOneChoice === "rock") || (playerOneChoice === "paper") || (playerOneChoice === "scissors")) {
+    if ((playerOneChoice === "Rock") || (playerOneChoice === "Paper") || (playerOneChoice === "Scissors")) {
 
         // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate counter.
-        if ((playerOneChoice === "rock") && (playerTwoChoice === "scissors")) {
+        if ((playerOneChoice === "Rock") && (playerTwoChoice === "Scissors")) {
           playerOneWins++;
           playerTwoLosses++;
+          $("#results").html(playerOneName + " wins!");
         }
-        else if ((playerOneChoice === "rock") && (playerTwoChoice === "paper")) {
+        else if ((playerOneChoice === "Rock") && (playerTwoChoice === "Paper")) {
           playerOneLosses++;
           playerTwoWin++;
         }
-        else if ((playerOneChoice === "scissors") && (playerTwoChoice === "rock")) {
+        else if ((playerOneChoice === "Scissors") && (playerTwoChoice === "Rock")) {
           playerOneLosses++;
           playerTwoWin++;
         }
-        else if ((playerOneChoice === "scissors") && (playerTwoChoice === "paper")) {
+        else if ((playerOneChoice === "Scissors") && (playerTwoChoice === "Paper")) {
           playerOneWins++;
           playerTwoLosses++;
         }
-        else if ((playerOneChoice === "paper") && (playerTwoChoice === "rock")) {
+        else if ((playerOneChoice === "Paper") && (playerTwoChoice === "Rock")) {
           playerOneWins++;
           playerTwoLosses++;
         }
-        else if ((playerOneChoice === "paper") && (playerTwoChoice === "scissors")) {
+        else if ((playerOneChoice === "Paper") && (playerTwoChoice === "Scissors")) {
           playerOneLosses++;
           playerTwoWin++;
         }

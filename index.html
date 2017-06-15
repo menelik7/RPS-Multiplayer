@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="assets/javascript/game.js"></script>
+    <script src="assets/javascript/app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.1.1/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase-auth.js"></script>
@@ -22,14 +22,17 @@
 
 		<div class="jumbotron col-lg-8 col-lg-offset-2">
 		  <h1>Rock Paper Scissors</h1>
+		  <h5 id="max-amount">Players: <span id="player-amount">0</span></h5>
 		</div>
+		
+		
 
 		<div class="row">
 			<div class="col-lg-5 col-lg-offset-3" id="credentials">
 	    		<div class="input-group" id="login">
-					<input type="text" class="form-control" placeholder="Name..." id="name-input">
+					<input type="text" class="form-control" placeholder="Enter a name to join..." id="name-input">
 					<span class="input-group-btn">
-						<button class="btn btn-success" type="button" id="btnLogin">Login</button>
+						<button class="btn btn-success" type="button" id="btnLogin">Join</button>
 					</span>
 				</div>
 			</div>
@@ -37,12 +40,12 @@
 		<div class="row">
 			<div class="col-lg-3 col-lg-offset-2">
 			    <div class="panel panel-primary">
-				    <div class="panel-heading" id="player1-name">Player 1</div>
+				    <div class="panel-heading" id="player1-name">Waiting for Player1...</div>
 					    <div class="panel-body">
 					    	<div id="player1-options">
-						  		<p id="rock">Rock</p><br>
-						  		<p id="paper">Paper</p><br>
-						  		<p id="scissors">Scissors</p>
+						  		<p id="rock1">Rock</p><br>
+						  		<p id="paper1">Paper</p><br>
+						  		<p id="scissors1">Scissors</p>
 					  		</div><hr>
 				  			<div class="row" id="score1">
 						  		<div class="col-md-4" id="player1-wins">Wins: </div>
@@ -67,12 +70,12 @@
 			    </div>
 		    <div class="col-lg-3">
 			    <div class="panel panel-primary">
-				    <div class="panel-heading" id="player2-name">Player 2</div>
+				    <div class="panel-heading" id="player2-name">Waiting for Player2...</div>
 					    <div class="panel-body">
 					    <div id="player2-options">
-					  		<p id="rock">Rock</p><br>
-					  		<p id="paper">Paper</p><br>
-					  		<p id="scissors">Scissors</p>
+					  		<p id="rock2">Rock</p><br>
+					  		<p id="paper2">Paper</p><br>
+					  		<p id="scissors2">Scissors</p>
 				  		</div><hr>
 				  			<div class="row" id="score2">
 						  		<div class="col-md-4" id="player2-wins">Wins: </div>
