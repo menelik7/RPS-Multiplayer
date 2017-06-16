@@ -15,6 +15,9 @@ $(document).ready(function(){
     firebase.initializeApp(config);
 
     var db = firebase.database().ref('game');
+  
+    
+    
     $("#score1").hide();
     $("#player1-options").hide();
     $("#score2").hide();
@@ -106,11 +109,9 @@ function savePlayerName() {
 
 
 function init() {
-  db.onDisconnect({
-    players: 0,
-    user1_name: 0
-  });
-
+  db.onDisconnect().set({
+  players: 0,
+});
   db.once('value')
   .then(function(game) {
     var state = game.val();
