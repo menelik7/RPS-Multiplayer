@@ -17,6 +17,8 @@ $(document).ready(function(){
     var db = firebase.database().ref('game');
     var db1 = firebase.database().ref('/game/player1');
     var db2 = firebase.database().ref('/game/player2');
+    var player1_name = "";
+    var player2_name = "";
     
     
     $("#score1").hide();
@@ -73,7 +75,7 @@ function savePlayerName() {
       db.once('value')
       .then(function(state) {
           if ( state.val().players < 2 ) {
-                var player1_name = $('#name-input').val();
+                player1_name = $('#name-input').val();
                 db.update({
                   player1: {
                     player1_name: player1_name,
@@ -92,14 +94,14 @@ function savePlayerName() {
                     $("#login").hide();
                     $("#score1").show();
                     $("#player1-options").show();
-                    $("#credentials").html("Hello <strong>" + snapshot.val().player1_name + "</strong>! You are player #1.<br>  Waiting for player #2 to join...");
+                    $("#credentials").html("Hello <strong>" + snapshot.val().player1_name + "</strong>! You are player 1.<br>  Waiting for player 2 to join...");
                 db.on("child_changed", function(snapshot) {
-                  $("#credentials").html("Hello <strong>" + player1_name + "</strong>! You are player #1.<br>  It's your turn...");
+                  $("#credentials").html("Hello <strong>" + player1_name + "</strong>! You are player 1.<br>  It's your turn...");
                   });
                 });
           }
           else {
-                var player2_name = $('#name-input').val();
+                player2_name = $('#name-input').val();
                 db.update({
                     player2: {
                       player2_name: player2_name,
@@ -118,7 +120,7 @@ function savePlayerName() {
                     $("#login").hide();
                     $("#score2").show();
                     $("#player2-options").show();
-                    $("#credentials").html("Hello <strong>" + snapshot.val().player2_name + "</strong>! You are player #2.<br>  Waiting for player #1 to choose...");
+                    $("#credentials").html("Hello <strong>" + snapshot.val().player2_name + "</strong>! You are player 2.<br>  Waiting for " + player1_name + " to choose...");
                 });
           }
       });
