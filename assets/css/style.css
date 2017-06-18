@@ -30,6 +30,7 @@ p {
 	background: #fff;
 	font-size: 18px;
 	text-align: center;
+	border-radius: 10px;
 }
 
 .panel-primary,
