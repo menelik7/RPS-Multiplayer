@@ -15,6 +15,7 @@ $(document).ready(function(){
     firebase.initializeApp(config);
 
     var db = firebase.database().ref('game');
+    var db1 = firebase.database().ref('/game/player1');
     var db2 = firebase.database().ref('/game/player2');
     
     
@@ -40,7 +41,7 @@ function changeState(snapshot) {
       if ( val > 1 ) {
           startGame();
           console.log("I am 2!!");
-          db.once("child_added", function(snapshot) {
+          db1.on("value", function(snapshot) {
               $("#player1-name").html(snapshot.val().player1_name);
               $("#player1-wins").html("Wins: " + snapshot.val().player1_wins);
               $("#player1-losses").html("Losses: " + snapshot.val().player1_losses);
@@ -48,6 +49,16 @@ function changeState(snapshot) {
               $("#score1").show();
               $("#player1-options").show();
           });
+          db2.on("value", function(snapshot) {
+          // Change the HTML to reflect
+          $("#player2-name").html(snapshot.val().player2_name);
+          $("#player2-wins").html("Wins: " + snapshot.val().player2_wins);
+          $("#player2-losses").html("Losses: " + snapshot.val().player2_losses);
+          $("#ties2").html("Ties: " + snapshot.val().player2_ties);
+          $("#login").hide();
+          $("#score2").show();
+          $("#player2-options").show();
+      });
       }
       $('#player-amount').text(val);    
   }
@@ -59,60 +70,58 @@ function changeState(snapshot) {
 }
 
 function savePlayerName() {
-  var name = $('#name-input').val();
+      db.once('value')
+      .then(function(state) {
+          if ( state.val().players < 2 ) {
+                var player1_name = $('#name-input').val();
+                db.update({
+                  player1: {
+                    player1_name: player1_name,
+                    player1_wins: 0,
+                    player1_losses: 0,
+                    player1_ties: 0
+                  }
+                });
 
-  db.once('value')
-  .then(function(state) {
-    if ( state.val().players < 2 ) {
-      db.update({
-        player1: {
-          player1_name: name,
-          player1_wins: 0,
-          player1_losses: 0,
-          player1_ties: 0
-        }
+                db1.on("value", function(snapshot) {
+                  console.log(player1_name);
+                    $("#player1-name").html(snapshot.val().player1_name);
+                    $("#player1-wins").html("Wins: " + snapshot.val().player1_wins);
+                    $("#player1-losses").html("Losses: " + snapshot.val().player1_losses);
+                    $("#ties1").html("Ties: " + snapshot.val().player1_ties);
+                    $("#login").hide();
+                    $("#score1").show();
+                    $("#player1-options").show();
+                    $("#credentials").html("Hello <strong>" + snapshot.val().player1_name + "</strong>! You are player #1.<br>  Waiting for player #2 to join...");
+                db.on("child_changed", function(snapshot) {
+                  $("#credentials").html("Hello <strong>" + player1_name + "</strong>! You are player #1.<br>  It's your turn...");
+                  });
+                });
+          }
+          else {
+                var player2_name = $('#name-input').val();
+                db.update({
+                    player2: {
+                      player2_name: player2_name,
+                      player2_wins: 0,
+                      player2_losses: 0,
+                      player2_ties: 0
+                    }
+                });
+                db2.on("value", function(snapshot) {
+                    // Change the HTML to reflect
+                     
+                    $("#player2-name").html(snapshot.val().player2_name);
+                    $("#player2-wins").html("Wins: " + snapshot.val().player2_wins);
+                    $("#player2-losses").html("Losses: " + snapshot.val().player2_losses);
+                    $("#ties2").html("Ties: " + snapshot.val().player2_ties);
+                    $("#login").hide();
+                    $("#score2").show();
+                    $("#player2-options").show();
+                    $("#credentials").html("Hello <strong>" + snapshot.val().player2_name + "</strong>! You are player #2.<br>  Waiting for player #1 to choose...");
+                });
+          }
       });
-
-      db.once("child_added", function(snapshot) {
-        console.log(name);
-          $("#player1-name").html(snapshot.val().player1_name);
-          $("#player1-wins").html("Wins: " + snapshot.val().player1_wins);
-          $("#player1-losses").html("Losses: " + snapshot.val().player1_losses);
-          $("#ties1").html("Ties: " + snapshot.val().player1_ties);
-          $("#login").hide();
-          $("#score1").show();
-          $("#player1-options").show();
-          $("#credentials").html("Hello <strong>" + snapshot.val().player1_name + "</strong>! You are player #1.  Waiting for player #2 to join...");
-
-      });
-    }
-    else {
-      db.update({
-        player2: {
-          player2_name: name,
-          player2_wins: 0,
-          player2_losses: 0,
-          player2_ties: 0
-        }
-      });
-
-
-      db2.on("value", function(snapshot) {
-          // Change the HTML to reflect
-           var name = $('#name-input').val();
-           console.log(name);
-          $("#player2-name").html(snapshot.val().player2_name);
-          $("#player2-wins").html("Wins: " + snapshot.val().player2_wins);
-          $("#player2-losses").html("Losses: " + snapshot.val().player2_losses);
-          $("#ties2").html("Ties: " + snapshot.val().player2_ties);
-          $("#login").hide();
-          $("#score2").show();
-          $("#player2-options").show();
-          $("#credentials").html("Hello <strong>" + snapshot.val().player2_name + "</strong>! You are player #2.  Waiting for player #1 to make a choice...");
-
-      });
-    }
-  });
 }
 
 
