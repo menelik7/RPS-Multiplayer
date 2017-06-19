@@ -25,7 +25,8 @@ p {
 }
 
 #credentials {
-	margin: 0 0 50px 340px;
+    margin-bottom: 50px; 
+	margin-left: 340px;
 	padding: 0;
 	background: #fff;
 	font-size: 18px;
@@ -41,6 +42,7 @@ p {
 }
 
 #results {
+	margin: auto;
 	font-size: 18px;
 }
 .col-md-8 {
@@ -95,6 +97,19 @@ p {
 	float: left;
 }
 
+#player1-options,
+#player2-options{
+	font-size: 24px;
+}
+
+#rock1,
+#paper1,
+#scissors1,
+#rock2,
+#paper2,
+#scissors2 {
+	font-size: 14px;
+}
 
 @media screen and (max-width: 768px) {
 
@@ -104,6 +119,19 @@ p {
 
 .row {
 	margin-bottom: 20px;
+}
+
+#credentials {
+    margin: 0 15px 0 15px; 
+	padding: 0;
+	background: #fff;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.panel-waring {
+    margin: 0 15px 0 15px; 
 }
 
 .panel-primary,
