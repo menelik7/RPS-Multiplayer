@@ -98,7 +98,7 @@ function savePlayerName() {
                         $("#player1-options").show();
                         $("#credentials").html("Hello <strong>" + snapshot.val().player1_name + "</strong>! You are player 1.<br>  Waiting for player 2 to join.");
 
-                  db.on("child_changed", function(snapshot) {
+                  db2.on("child_added", function(snapshot) {
                         $("#credentials").html("Hello <strong>" + player1_name + "</strong>! You are player 1.<br>  It's your turn.");
                         });
                   });
