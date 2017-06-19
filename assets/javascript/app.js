@@ -159,70 +159,100 @@ function init() {
 
           $('#btnLogin').on('click', savePlayerName);
 
-          
+
+           $("#rock1").on('click', function(){
+                  var player1_choice = "Rock";
+                  db1.update({
+                              player1_choice: "Rock"
+                  });
+                  $("#player1-options").html("<strong>" + player1_choice + "</strong>");
+                  whoWon();
+            });
+
+            $("#paper1").on('click', function(){
+                  var player1_choice = "Paper";
+                   db1.update({
+                              player1_choice: "Paper"
+                  });
+                  $("#player1-options").html("<strong>" + player1_choice + "</strong>");
+                  whoWon();
+            });
+
+            $("#scissors1").on('click', function(){
+                  var player1_choice = "Scissors";
+                   db1.update({
+                              player1_choice: "Scissors"
+                  });
+                  $("#player1-options").html("<strong>" + player1_choice + "</strong>");
+                  whoWon();
+            });
+
+
+
+            $("#rock2").on('click', function(){
+                  var player2_choice = "Rock";
+                  db2.update({
+                              player2_choice: "Rock"
+                  });
+                  $("#player2-options").html("<strong>" + player2_choice + "</strong>");
+                  whoWon();
+            })
+            $("#paper2").on('click', function(){
+                  var player2_choice = "Paper";
+                  db2.update({
+                              player2_choice: "Paper"
+                  });
+                  $("#player2-options").html("<strong>" + player2_choice + "</strong>");
+                  whoWon();
+            })
+            $("#scissors2").on('click', function(){
+                  var player2_choice = "Scissors";
+                  db2.update({
+                              player2_choice: "Scissors"
+                  });
+                  $("#player2-options").html("<strong>" + player2_choice + "</strong>");
+                  whoWon();
+            })
 
           db.on('child_changed', changeState);
 }
 
 // If the user clicks "rock" or "paper" or "scissors", run the game logic.
 function whoWon(){
-      $("#rock1").on('click', function(){
-            var playerOneChoice = "Rock";
-            $("#player1-options").html("<strong>" + playerOneChoice + "</strong>");
-      })
-      $("#paper1").on('click', function(){
-            var playerOneChoice = "Paper";
-            $("#player1-options").html("<strong>" + playerOneChoice + "</strong>");
-      })
-      $("#scissors1").on('click', function(){
-            var playerOneChoice = "Scissors";
-            $("#player1-options").html("<strong>" + playerOneChoice + "</strong>");
-      })
-
-
-      $("#rock2").on('click', function(){
-            var playerTwoChoice = "Rock";
-            $("#player2-options").html("<strong>" + playerTwoChoice + "</strong>");
-      })
-      $("#paper2").on('click', function(){
-            var playerTwoChoice = "Paper";
-            $("#player2-options").html("<strong>" + playerTwoChoice + "</strong>");
-      })
-      $("#scissors2").on('click', function(){
-            var playerTwoChoice = "Scissors";
-            $("#player2-options").html("<strong>" + playerTwoChoice + "</strong>");
-      })
-
       if ((playerOneChoice === "Rock") || (playerOneChoice === "Paper") || (playerOneChoice === "Scissors")) {
 
             // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate counter.
-            if ((playerOneChoice === "Rock") && (playerTwoChoice === "Scissors")) {
-              player1_wins++;
+            if ((player1_choice === "Rock") && (player2_choice === "Scissors")) {
+              db1.update({
+                              player1_wins: player1_wins++,
+                  });
               player2_losses++;
-              $("#results").html(playerOneName + " wins!");
+              console.log(player1_name);
+              $("#results").html(player1_name + " wins!");
             }
-            else if ((playerOneChoice === "Rock") && (playerTwoChoice === "Paper")) {
+            else if ((player1_choice === "Rock") && (player2_choice === "Paper")) {
               player1_losses++;
               player2_win++;
             }
-            else if ((playerOneChoice === "Scissors") && (playerTwoChoice === "Rock")) {
+            else if ((player1_choice === "Scissors") && (player2_choice === "Rock")) {
               player1_losses++;
               player2_win++;
             }
-            else if ((playerOneChoice === "Scissors") && (playerTwoChoice === "Paper")) {
+            else if ((player1_choice === "Scissors") && (player2_choice === "Paper")) {
               player1_wins++;
               player2_losses++;
             }
-            else if ((playerOneChoice === "Paper") && (playerTwoChoice === "Rock")) {
+            else if ((player1_choice === "Paper") && (player2_choice === "Rock")) {
               player1_wins++;
               player2_losses++;
             }
-            else if ((playerOneChoice === "Paper") && (playerTwoChoice === "Scissors")) {
+            else if ((player1_choice === "Paper") && (player2_choice === "Scissors")) {
               player1_losses++;
               player2_win++;
             }
-            else if (playerOneChoice === playerTwoChoice) {
-              ties++;
+            else if (player1_choice === player2_choice) {
+              player1_ties++;
+              player2_ties++;
             }
       }
 
